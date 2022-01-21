@@ -3,6 +3,7 @@ package com.csci651.packetanalyzer;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class PacketAnalyzer {
 
@@ -14,10 +15,29 @@ public class PacketAnalyzer {
         return value;
     }
 
+    private static String toBitString(final byte[] bytes) {
+        final char[] bits = new char[8 * bytes.length];
+        for(int i = 0; i < bytes.length; i++) {
+            final byte byteval = bytes[i];
+            int bytei = i << 3;
+            int mask = 0x1;
+            for(int j = 7; j >= 0; j--) {
+                final int bitval = byteval & mask;
+                if(bitval == 0) {
+                    bits[bytei + j] = '0';
+                } else {
+                    bits[bytei + j] = '1';
+                }
+                mask <<= 1;
+            }
+        }
+        return String.valueOf(bits);
+    }
+
     private static char[] byteArrayToHexadecimal(byte[] bytes) {
         int len = bytes.length;
 
-        char[] hexValues = "0123456789ABCDEF".toCharArray();
+        char[] hexValues = "0123456789abcdef".toCharArray();
         char[] hexCharacter = new char[len * 2];
 
         for (int i = 0; i < len; i++) {
@@ -30,37 +50,28 @@ public class PacketAnalyzer {
 
     public static void main(String[] args) {
         String filename = args[0];
-        File f = new File(filename);
-        byte[] preamble = new byte[8];
         byte[] dest = new byte[6];
         byte[] src = new byte[6];
         byte[] type = new byte[2];
         try {
-            FileInputStream fis = new FileInputStream(f);
-            fis.read(preamble);
+            InputStream fis = new FileInputStream(filename);
             System.out.println("ETHER:  ----- Ether Header -----");
-            System.out.println("ETHER:                          ");
-            System.out.println("Preamble");
-            int v1 = byteArrayToInt(preamble);
-            System.out.println(v1);
-
+            System.out.println("ETHER:");
             fis.read(dest);
-            int v2 = byteArrayToInt(dest);
-            char[] h1 = byteArrayToHexadecimal(dest);
-            System.out.println("ETHER:  Destination = " + v2);
-            System.out.println("ETHER:  Destination = " + h1);
+            char[] hex1 = byteArrayToHexadecimal(dest);
+            String addr1 = new String(hex1).replaceAll(".{2}(?=.)", "$0:");
+            System.out.println("ETHER:  Destination = " + addr1);
 
             fis.read(src);
-            int v3 = byteArrayToInt(src);
-            char[] h2 = byteArrayToHexadecimal(src);
-            System.out.println("ETHER:  Source = " + v3);
-            System.out.println("ETHER:  Source = " + h2);
+            char[] hex2 = byteArrayToHexadecimal(src);
+            String addr2 = new String(hex2).replaceAll(".{2}(?=.)", "$0:");
+            System.out.println("ETHER:  Source = " + addr2);
 
             fis.read(type);
             int v4 = byteArrayToInt(type);
             char[] h3 = byteArrayToHexadecimal(type);
-            System.out.println("ETHER:  Ethertype = " + v4);
-            System.out.println("ETHER:  Ethertype = " + h3);
+            System.out.println("ETHER:  Ethertype = " + new String(h3) + " (IP)");
+            System.out.println("ETHER:");
 
             fis.close();
         } catch (IOException ex) {
