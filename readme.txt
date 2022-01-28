@@ -8,7 +8,8 @@ The packets are in the folder of the project, so an example of a command would b
 % java PacketAnalyzer.java ../../../../pkt/new_tcp_packet1.bin
 
 The path to the data file will vary based on where the packet files are located on the system
-the program is running on. You will get an error if the file path is not correct. If so, please
-check where the packets are located and try again. The output should be displayed in the terminal.
+the program is running on. You will get an error if the file path is not correct. If you get
+an error, please check where the packets are located and try again. The output should be displayed
+in the terminal.
 
 
