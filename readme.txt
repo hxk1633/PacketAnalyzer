@@ -1,3 +1,7 @@
+First, you must cd to where the java files are:
+
+% cd path/to/java/files
+
 The java program must be compiled and then run as a shell command:
 
 % javac PacketAnalyzer.java
