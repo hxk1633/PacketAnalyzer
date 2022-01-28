@@ -38,24 +38,24 @@ public class PacketAnalyzer {
         Boolean delay = isKthBitSet(n, 5);
         Boolean throughput = isKthBitSet(n, 4);
         Boolean reliability = isKthBitSet(n, 3);
-        System.out.println("\t\t\txxx. .... = 0 (precedence)");
+        System.out.println("\t\txxx. .... = 0 (precedence)");
 
         if (delay) {
-            System.out.println("\t\t\t...1 .... = low delay");
+            System.out.println("\t\t...1 .... = low delay");
         } else {
-            System.out.println("\t\t\t...0 .... = normal delay");
+            System.out.println("\t\t...0 .... = normal delay");
         }
 
         if (throughput) {
-            System.out.println("\t\t\t.... 1... = high throughput");
+            System.out.println("\t\t.... 1... = high throughput");
         } else {
-            System.out.println("\t\t\t.... 0... = normal throughput");
+            System.out.println("\t\t.... 0... = normal throughput");
         }
 
         if (reliability) {
-            System.out.println("\t\t\t.... .1.. = high reliability");
+            System.out.println("\t\t.... .1.. = high reliability");
         } else {
-            System.out.println("\t\t\t.... .0.. = normal reliability");
+            System.out.println("\t\t.... .0.. = normal reliability");
         }
 
     }
@@ -69,39 +69,39 @@ public class PacketAnalyzer {
         Boolean fin = isKthBitSet(n, 1);
 
         if (up) {
-            System.out.println("\t\t\t..1. .... = Urgent pointer");
+            System.out.println("\t\t..1. .... = Urgent pointer");
         } else {
-            System.out.println("\t\t\t..0. .... = No urgent pointer");
+            System.out.println("\t\t..0. .... = No urgent pointer");
         }
 
         if (ack) {
-            System.out.println("\t\t\t...1 .... = Acknowledgement ");
+            System.out.println("\t\t...1 .... = Acknowledgement ");
         } else {
-            System.out.println("\t\t\t...0 .... = No acknowledgement ");
+            System.out.println("\t\t...0 .... = No acknowledgement ");
         }
 
         if (push) {
-            System.out.println("\t\t\t.... 1... = Push");
+            System.out.println("\t\t.... 1... = Push");
         } else {
-            System.out.println("\t\t\t.... 0... = No push");
+            System.out.println("\t\t.... 0... = No push");
         }
 
         if (reset) {
-            System.out.println("\t\t\t.... .1.. = Reset");
+            System.out.println("\t\t.... .1.. = Reset");
         } else {
-            System.out.println("\t\t\t.... .0.. = No reset");
+            System.out.println("\t\t.... .0.. = No reset");
         }
 
         if (syn) {
-            System.out.println("\t\t\t.... ..1. = Syn");
+            System.out.println("\t\t.... ..1. = Syn");
         } else {
-            System.out.println("\t\t\t.... ..0. = No Syn");
+            System.out.println("\t\t.... ..0. = No Syn");
         }
 
         if (fin) {
-            System.out.println("\t\t\t.... ...1 = Fin");
+            System.out.println("\t\t.... ...1 = Fin");
         } else {
-            System.out.println("\t\t\t.... ...0 = No Fin");
+            System.out.println("\t\t.... ...0 = No Fin");
         }
     }
 
@@ -109,15 +109,15 @@ public class PacketAnalyzer {
         Boolean df = isKthBitSet(n, 7);
         Boolean mf = isKthBitSet(n, 6);
         if (df) {
-            System.out.println("\t\t\t.1.. .... = do not fragment");
+            System.out.println("\t\t.1.. .... = do not fragment");
         } else {
-            System.out.println("\t\t\t.0.. .... = OK to fragment");
+            System.out.println("\t\t.0.. .... = OK to fragment");
         }
 
         if (mf) {
-            System.out.println("\t\t\t..1. .... = more fragments");
+            System.out.println("\t\t..1. .... = more fragments");
         } else {
-            System.out.println("\t\t\t..0. .... = last fragment");
+            System.out.println("\t\t..0. .... = last fragment");
         }
     }
 
